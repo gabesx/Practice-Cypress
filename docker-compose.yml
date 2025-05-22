@@ -16,7 +16,7 @@ services:
     image: wordpress:php8.2-fpm-alpine
     platform: linux/arm64/v8
     ports:
-      - "8080:80"
+      - "808:80"
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: wordpress
@@ -38,6 +38,19 @@ services:
       MYSQL_ROOT_PASSWORD: somewordpress
     volumes:
       - db_data:/var/lib/mysql
+
+  cypress:
+    build: .
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - DISPLAY=${DISPLAY}
+      - CYPRESS_baseUrl=http://nginx:80
+    depends_on:
+      - nginx
+      - wordpress
+    command: npm run cypress:open
 
 volumes:
   wordpress_data:
