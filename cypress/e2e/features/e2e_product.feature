@@ -48,7 +48,7 @@ Scenario Outline: Check percentage Wholesale Discount for each role
   When I visit the saved product page
   And I should see the product prices: regular "100000", sale "70000" and wholesale value "<wholesale_price>"
   And I add the product to the cart
-  And I open the cart
+  And navigate to cart page
   Then I should see the cart price as "<wholesale_price>", regular "100000", sale "70000"
   And I log out
 
