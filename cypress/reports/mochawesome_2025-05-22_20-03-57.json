@@ -1,0 +1,91 @@
+{
+  "stats": {
+    "suites": 0,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-05-22T13:03:57.701Z",
+    "end": "2025-05-22T13:03:57.861Z",
+    "duration": 160,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a97aa4b3-b08e-4adb-a468-2df010bf2518",
+      "title": "",
+      "fullFile": "cypress/e2e/step_definitions/create_users.cy.js",
+      "file": "cypress/e2e/step_definitions/create_users.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [
+        {
+          "title": "An uncaught error was detected outside of a test",
+          "fullTitle": "An uncaught error was detected outside of a test",
+          "timedOut": null,
+          "duration": 125,
+          "state": "failed",
+          "speed": null,
+          "pass": false,
+          "fail": true,
+          "pending": false,
+          "context": null,
+          "code": "throw err;",
+          "err": {
+            "message": "Error: The following error originated from your test code, not from Cypress.\n\n  > Expected to find a global registry (this usually means you are trying to define steps or hooks in support/e2e.js, which is not supported) (this might be a bug, please report at https://github.com/badeball/cypress-cucumber-preprocessor)\n\nWhen Cypress detects uncaught errors originating from your test code it will automatically fail the current test.\n\nCypress could not associate this error to any specific test.\n\nWe dynamically generated a new test to display this failure.",
+            "estack": "Error: The following error originated from your test code, not from Cypress.\n\n  > Expected to find a global registry (this usually means you are trying to define steps or hooks in support/e2e.js, which is not supported) (this might be a bug, please report at https://github.com/badeball/cypress-cucumber-preprocessor)\n\nWhen Cypress detects uncaught errors originating from your test code it will automatically fail the current test.\n\nCypress could not associate this error to any specific test.\n\nWe dynamically generated a new test to display this failure.\n    at createError (webpack://senior-testing-interview/./node_modules/@badeball/cypress-cucumber-preprocessor/dist/helpers/error.js:9:0)\n    at fail (webpack://senior-testing-interview/./node_modules/@badeball/cypress-cucumber-preprocessor/dist/helpers/assertions.js:7:0)\n    at assert (webpack://senior-testing-interview/./node_modules/@badeball/cypress-cucumber-preprocessor/dist/helpers/assertions.js:14:0)\n    at assertAndReturn (webpack://senior-testing-interview/./node_modules/@badeball/cypress-cucumber-preprocessor/dist/helpers/assertions.js:18:0)\n    at getRegistry (webpack://senior-testing-interview/./node_modules/@badeball/cypress-cucumber-preprocessor/dist/registry.js:182:0)\n    at defineStep (webpack://senior-testing-interview/./node_modules/@badeball/cypress-cucumber-preprocessor/dist/entrypoint-browser.js:20:0)\n    at eval (webpack://senior-testing-interview/./cypress/e2e/step_definitions/create_users.cy.js:3:6)\n    at eval (http://localhost:8081/__cypress/tests?p=cypress/e2e/step_definitions/create_users.cy.js:21578:3)\n    at eval (http://localhost:8081/__cypress/tests?p=cypress/e2e/step_definitions/create_users.cy.js:21580:12)\n    at eval (<anonymous>)",
+            "diff": null
+          },
+          "uuid": "fbe3f085-c6d1-4b73-8026-afa6d6f104cd",
+          "parentUUID": "a97aa4b3-b08e-4adb-a468-2df010bf2518",
+          "isHook": false,
+          "skipped": false
+        }
+      ],
+      "suites": [],
+      "passes": [],
+      "failures": [
+        "fbe3f085-c6d1-4b73-8026-afa6d6f104cd"
+      ],
+      "pending": [],
+      "skipped": [],
+      "duration": 125,
+      "root": true,
+      "rootEmpty": false,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "timestamp": "yyyy-mm-dd_HH-MM-ss"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

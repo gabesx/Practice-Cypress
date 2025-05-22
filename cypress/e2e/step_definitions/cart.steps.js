@@ -70,11 +70,11 @@ Then('I should see the cart price as {string}, regular {string}, sale {string}',
     } else {
       expectedWholesale = Number(wholesale);
     }
-    cy.get('.wc-block-mini-cart__items .wc-block-cart-item__price, .wc-block-cart-item__price')
+    cy.get('.wc-block-mini-cart_items .wc-block-cart-item__price, .wc-block-cart-item__price')
       .should('contain', `Rp${expectedWholesale.toLocaleString('id-ID')}`);
   } else {
     const saleNum = Number(sale);
-    cy.get('.wc-block-mini-cart__items .wc-block-cart-item__price, .wc-block-cart-item__price')
+    cy.get('.wc-block-mini-cart_items .wc-block-cart-item__price, .wc-block-cart-item__price')
       .should('contain', `Rp${saleNum.toLocaleString('id-ID')}`);
   }
 });
