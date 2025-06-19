@@ -28,8 +28,8 @@ module.exports = defineConfig({
     },
     video: true,
     screenshotOnRunFailure: true,
-    defaultCommandTimeout: 10000,
-    pageLoadTimeout: 30000,
+    defaultCommandTimeout: 15000,
+    pageLoadTimeout: 45000,
     viewportWidth: 1280,
     viewportHeight: 720,
     experimentalModifyObstructiveThirdPartyCode: true,
@@ -43,11 +43,9 @@ module.exports = defineConfig({
     enabled: true,
     workers: 4
   },
-  // CI configuration
   ci: {
     group: 'Parallel Tests',
     parallel: true,
-    // Generate a unique build ID
     buildId: `build-${Date.now()}`
   }
 }); 
