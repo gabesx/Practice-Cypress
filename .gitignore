@@ -4,3 +4,4 @@ cypress.env.json
 .env.local
 .env.*.local
 cypress/downloads/
+test-cloud.sh
