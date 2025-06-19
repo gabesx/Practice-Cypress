@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-  2x-chrome:
+  chrome_parallel:
     needs: install
     runs-on: mac-latest
     strategy:
@@ -57,7 +57,7 @@ jobs:
           START_SERVER_AND_TEST_INSECURE: 1
           CI: true
 
-  2x-firefox:
+  firefox_parallel:
     needs: install
     runs-on: mac-latest
     strategy:
@@ -89,7 +89,7 @@ jobs:
           START_SERVER_AND_TEST_INSECURE: 1
           CI: true
 
-  4x-electron:
+  electron_parallel:
     needs: install
     runs-on: mac-latest
     strategy:
