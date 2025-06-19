@@ -42,16 +42,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Chrome Tests
-        uses: cypress-io/github-action@v6
-        with:
-          browser: chrome
-          record: true
-          parallel: true
-          group: '2x-chrome'
-          spec: |
-            cypress/e2e/features/simultaneous_checkout.feature
-            cypress/e2e/features/transaction.feature
+      - name: Wait for server and run Chrome tests
+        run: npm run test:ci:chrome
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -59,6 +51,7 @@ jobs:
           STANDARD_PASSWORD: ${{ secrets.STANDARD_PASSWORD }}
           VISUAL_USERNAME: ${{ secrets.VISUAL_USERNAME }}
           VISUAL_PASSWORD: ${{ secrets.VISUAL_PASSWORD }}
+          START_SERVER_AND_TEST_INSECURE: 1
 
   2x-firefox:
     needs: install
@@ -80,16 +73,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Firefox Tests
-        uses: cypress-io/github-action@v6
-        with:
-          browser: firefox
-          record: true
-          parallel: true
-          group: '2x-firefox'
-          spec: |
-            cypress/e2e/features/simultaneous_checkout.feature
-            cypress/e2e/features/transaction.feature
+      - name: Wait for server and run Firefox tests
+        run: npm run test:ci:firefox
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -97,6 +82,7 @@ jobs:
           STANDARD_PASSWORD: ${{ secrets.STANDARD_PASSWORD }}
           VISUAL_USERNAME: ${{ secrets.VISUAL_USERNAME }}
           VISUAL_PASSWORD: ${{ secrets.VISUAL_PASSWORD }}
+          START_SERVER_AND_TEST_INSECURE: 1
 
   4x-electron:
     needs: install
@@ -118,19 +104,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Electron Tests
-        uses: cypress-io/github-action@v6
-        with:
-          record: true
-          parallel: true
-          group: '4x-electron'
-          spec: |
-            cypress/e2e/features/simultaneous_checkout.feature
-            cypress/e2e/features/transaction.feature
+      - name: Wait for server and run Electron tests
+        run: npm run test:ci:electron
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           STANDARD_USERNAME: ${{ secrets.STANDARD_USERNAME }}
           STANDARD_PASSWORD: ${{ secrets.STANDARD_PASSWORD }}
           VISUAL_USERNAME: ${{ secrets.VISUAL_USERNAME }}
-          VISUAL_PASSWORD: ${{ secrets.VISUAL_PASSWORD }} 
+          VISUAL_PASSWORD: ${{ secrets.VISUAL_PASSWORD }}
+          START_SERVER_AND_TEST_INSECURE: 1 
