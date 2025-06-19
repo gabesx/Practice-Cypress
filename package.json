@@ -1,20 +1,34 @@
 {
-  "name": "senior-testing-interview",
+  "name": "sauce-demo-e2e-tests",
   "version": "1.0.0",
-  "description": "",
+  "description": "End-to-end tests for Sauce Demo website using Cypress and Cucumber",
   "main": "index.js",
   "scripts": {
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "test": "cypress run"
+    "test": "cypress run",
+    "test:chrome": "cypress run --browser chrome",
+    "test:firefox": "cypress run --browser firefox",
+    "test:smoke": "cypress run --env grepTags=@smoke",
+    "test:regression": "cypress run --env grepTags=@regression"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "cypress",
+    "cucumber",
+    "testing",
+    "e2e"
+  ],
+  "author": "Emile Gabriel",
   "license": "ISC",
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^18.0.4",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
     "cypress": "^12.17.4",
-    "cypress-file-upload": "^5.0.8"
+    "esbuild-wasm": "^0.19.11"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": "cypress/e2e/step_definitions/**/*.js",
+    "filterSpecs": true,
+    "omitFiltered": true
   }
 }

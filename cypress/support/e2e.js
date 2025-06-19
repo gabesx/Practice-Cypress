@@ -1,7 +1,10 @@
-import '@badeball/cypress-cucumber-preprocessor';
-
 // Import commands.js using ES2015 syntax:
-import './commands';
+import './commands'
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands') 
+// Reset application state before each test
+beforeEach(() => {
+  cy.window().then((win) => {
+    win.sessionStorage.clear()
+    win.localStorage.clear()
+  })
+}) 
