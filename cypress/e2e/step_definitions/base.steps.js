@@ -10,7 +10,7 @@ Given('{string} is viewing the inventory page', (username) => {
   cy.visit('/inventory.html');
 });
 
-Given('{string} logs in and adds items to cart:', (username, dataTable) => {
+Given('logs in as {string} account type and adds items to cart:', (username, dataTable) => {
   cy.visit('/');
   cy.get('[data-test="username"]').type(Cypress.env(`${username.toUpperCase()}_USERNAME`));
   cy.get('[data-test="password"]').type(Cypress.env(`${username.toUpperCase()}_PASSWORD`));
@@ -23,7 +23,21 @@ Given('{string} logs in and adds items to cart:', (username, dataTable) => {
   });
 });
 
-Given('{string} completes checkout with:', (username, dataTable) => {
+Given('user {string} account logs in and adds items to cart:', (username, dataTable) => {
+  cy.visit('/');
+  cy.get('[data-test="username"]').type(Cypress.env(`${username.toUpperCase()}_USERNAME`));
+  cy.get('[data-test="password"]').type(Cypress.env(`${username.toUpperCase()}_PASSWORD`));
+  cy.get('[data-test="login-button"]').click();
+  
+  dataTable.hashes().forEach((row) => {
+    cy.contains('.inventory_item', row.item)
+      .find('button')
+      .click();
+  });
+}); 
+
+
+When('user {string} account completes checkout with:', (username, dataTable) => {
   const userInfo = dataTable.hashes()[0];
   
   cy.get('.shopping_cart_link').click();
@@ -36,6 +50,23 @@ Given('{string} completes checkout with:', (username, dataTable) => {
   
   cy.get('[data-test="finish"]').click();
   cy.get('.complete-header').should('have.text', 'Thank you for your order!');
+});
+
+When('user {string} account completes the purchase', (username) => {
+  cy.get('.shopping_cart_link').click();
+  cy.get('[data-test="checkout"]').click();
+  cy.get('[data-test="firstName"]').type('Test');
+  cy.get('[data-test="lastName"]').type('User');
+  cy.get('[data-test="postalCode"]').type('12345');
+  cy.get('[data-test="continue"]').click();
+  cy.get('[data-test="finish"]').click();
+});
+
+When('user {string} account logs in to the inventory page', (username) => {
+  cy.visit('/');
+  cy.get('[data-test="username"]').type(Cypress.env(`${username.toUpperCase()}_USERNAME`));
+  cy.get('[data-test="password"]').type(Cypress.env(`${username.toUpperCase()}_PASSWORD`));
+  cy.get('[data-test="login-button"]').click();
 });
 
 Then('both users should have empty carts when they log back in', () => {
@@ -55,42 +86,19 @@ Then('both users should have empty carts when they log back in', () => {
   cy.get('#logout_sidebar_link').should('be.visible').click();
 });
 
-Given('{string} logs in and adds {string} to cart', (username, itemName) => {
-  cy.visit('/');
-  cy.get('[data-test="username"]').type(Cypress.env(`${username.toUpperCase()}_USERNAME`));
-  cy.get('[data-test="password"]').type(Cypress.env(`${username.toUpperCase()}_PASSWORD`));
-  cy.get('[data-test="login-button"]').click();
-  
+Then('{string} should still be available for purchase', (itemName) => {
+  cy.contains('.inventory_item', itemName)
+    .should('be.visible');
+    
   cy.contains('.inventory_item', itemName)
     .find('button')
-    .click();
-});
-
-When('{string} completes the purchase', () => {
-  cy.get('.shopping_cart_link').click();
-  cy.get('[data-test="checkout"]').click();
-  cy.get('[data-test="firstName"]').type('Test');
-  cy.get('[data-test="lastName"]').type('User');
-  cy.get('[data-test="postalCode"]').type('12345');
-  cy.get('[data-test="continue"]').click();
-  cy.get('[data-test="finish"]').click();
-});
-
-When('{string} logs in to the inventory page', (username) => {
-  cy.visit('/');
-  cy.get('[data-test="username"]').type(Cypress.env(`${username.toUpperCase()}_USERNAME`));
-  cy.get('[data-test="password"]').type(Cypress.env(`${username.toUpperCase()}_PASSWORD`));
-  cy.get('[data-test="login-button"]').click();
-});
-
-Then('{string} should show reduced inventory', (itemName) => {
+    .should('have.text', 'Add to cart')
+    .should('be.enabled');
+    
   cy.contains('.inventory_item', itemName)
-    .find('.inventory_item_desc')
-    .should('have.text', 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
-  
-  cy.contains('.inventory_item', itemName)
-    .find('button')
-    .should('have.text', 'Add to cart');
+    .parents('.inventory_item')
+    .find('.inventory_item_price')
+    .should('be.visible');
 });
 
 Then('each user should see their correct order confirmation', () => {

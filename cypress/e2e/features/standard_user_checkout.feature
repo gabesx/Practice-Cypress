@@ -3,12 +3,12 @@ Feature: Standard User Checkout Flow
 
   @standard_checkout @smoke
   Scenario: Standard user completes checkout process
-    Given "standard_user" logs in and adds items to cart:
+    Given logs in as "standard" account type and adds items to cart:
       | item                     |
       | Sauce Labs Backpack     |
       | Sauce Labs Bike Light   |
-    When "standard_user" completes checkout with:
+    When user "standard" account completes checkout with:
       | firstName | lastName | postalCode |
       | John      | Doe      | 12345      |
     Then the cart should be empty
-    And the order confirmation should be visible 
+    And the order confirmation should be visible

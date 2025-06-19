@@ -6,9 +6,7 @@ Feature: Product Sorting Functionality
 
   Background:
     Given I am on the Sauce Demo login page
-    When I enter username "standard_user"
-    And I enter password "secret_sauce"
-    And I click the login button
+    When I login as "standard_user" with "secret_sauce"
     Then I should be logged in successfully
 
   @sort_name_az @smoke

@@ -3,11 +3,11 @@ Feature: Visual User Checkout Flow
 
   @visual_checkout @smoke
   Scenario: Visual user completes checkout process
-    Given "visual_user" logs in and adds items to cart:
+    Given logs in as "visual" account type and adds items to cart:
       | item                        |
       | Sauce Labs Fleece Jacket   |
       | Sauce Labs Onesie          |
-    When "visual_user" completes checkout with:
+    When user "visual" account completes checkout with:
       | firstName | lastName | postalCode |
       | Jane      | Smith    | 67890      |
     Then the cart should be empty
