@@ -1,44 +1,28 @@
 {
-  "name": "sauce-demo-e2e-tests",
+  "name": "wholesale-test-site",
   "version": "1.0.0",
-  "description": "End-to-end tests for Sauce Demo website using Cypress and Cucumber",
+  "description": "Cypress tests for Sauce Demo website",
   "main": "index.js",
   "scripts": {
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
     "test": "cypress run",
-    "test:chrome": "cypress run --browser chrome",
-    "test:firefox": "cypress run --browser firefox",
-    "test:smoke": "cypress run --env grepTags=@smoke",
-    "test:regression": "cypress run --env grepTags=@regression",
-    "cy:parallel": "cypress run --record --parallel --ci-build-id build-$GITHUB_RUN_ID",
-    "cy:chrome-parallel": "cypress run --record --group 2x-chrome --browser chrome --parallel --ci-build-id build-$GITHUB_RUN_ID",
-    "cy:firefox-parallel": "cypress run --record --group 2x-firefox --browser firefox --parallel --ci-build-id build-$GITHUB_RUN_ID",
-    "cy:electron-parallel": "cypress run --record --group 4x-electron --parallel --ci-build-id build-$GITHUB_RUN_ID",
-    "test:ci": "start-server-and-test start https://www.saucedemo.com cy:parallel",
-    "test:ci:chrome": "start-server-and-test start https://www.saucedemo.com cy:chrome-parallel",
-    "test:ci:firefox": "start-server-and-test start https://www.saucedemo.com cy:firefox-parallel",
-    "test:ci:electron": "start-server-and-test start https://www.saucedemo.com cy:electron-parallel"
+    "test:ci:chrome": "start-server-and-test 'https://www.saucedemo.com' cy:chrome-parallel",
+    "test:ci:firefox": "start-server-and-test 'https://www.saucedemo.com' cy:firefox-parallel",
+    "test:ci:electron": "start-server-and-test 'https://www.saucedemo.com' cy:electron-parallel",
+    "cy:chrome-parallel": "cypress run --browser chrome --record --parallel --group chrome-parallel",
+    "cy:firefox-parallel": "cypress run --browser firefox --record --parallel --group firefox-parallel",
+    "cy:electron-parallel": "cypress run --record --parallel --group electron-parallel"
   },
   "keywords": [
     "cypress",
-    "cucumber",
     "testing",
     "e2e"
   ],
-  "author": "Emile Gabriel",
+  "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@badeball/cypress-cucumber-preprocessor": "^18.0.4",
+  "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^18.0.6",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
-    "cypress": "^12.17.4",
-    "esbuild-wasm": "^0.19.11",
-    "start-server-and-test": "^2.0.12",
-    "wait-on": "^8.0.3"
-  },
-  "cypress-cucumber-preprocessor": {
-    "stepDefinitions": "cypress/e2e/step_definitions/**/*.js",
-    "filterSpecs": true,
-    "omitFiltered": true
+    "cypress": "^13.6.4",
+    "start-server-and-test": "^2.0.3"
   }
 }
