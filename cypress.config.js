@@ -38,14 +38,5 @@ module.exports = defineConfig({
       runMode: 2,
       openMode: 0
     }
-  },
-  parallelization: {
-    enabled: true,
-    workers: 4
-  },
-  ci: {
-    group: 'Parallel Tests',
-    parallel: true,
-    buildId: `build-${Date.now()}`
   }
 }); 

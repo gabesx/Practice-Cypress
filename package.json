@@ -1,23 +1,26 @@
 {
-  "name": "wholesale-test-site",
+  "name": "practice-cypress",
   "version": "1.0.0",
-  "description": "Cypress tests for Sauce Demo website",
+  "description": "Cypress tests for practice website using Cypress and Cucumber",
   "main": "index.js",
   "scripts": {
     "test": "cypress run",
-    "test:ci:chrome": "start-server-and-test 'https://www.saucedemo.com' cy:chrome-parallel",
-    "test:ci:firefox": "start-server-and-test 'https://www.saucedemo.com' cy:firefox-parallel",
-    "test:ci:electron": "start-server-and-test 'https://www.saucedemo.com' cy:electron-parallel",
-    "cy:chrome-parallel": "cypress run --browser chrome --record --parallel --group chrome-parallel",
-    "cy:firefox-parallel": "cypress run --browser firefox --record --parallel --group firefox-parallel",
-    "cy:electron-parallel": "cypress run --record --parallel --group electron-parallel"
+    "test:parallel": "./run-parallel-browsers.sh",
+    "test:chrome": "cypress run --browser chrome",
+    "test:firefox": "cypress run --browser firefox",
+    "test:electron": "cypress run --browser electron",
+    "cy:open": "cypress open",
+    "test:cloud": "cypress run --record --parallel --group 'Parallel Tests'",
+    "test:cloud:chrome": "cypress run --record --browser chrome --group 'Chrome Tests'",
+    "test:cloud:firefox": "cypress run --record --browser firefox --group 'Firefox Tests'",
+    "test:cloud:electron": "cypress run --record --browser electron --group 'Electron Tests'"
   },
   "keywords": [
     "cypress",
     "testing",
     "e2e"
   ],
-  "author": "",
+  "author": "Emile Francois",
   "license": "ISC",
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^18.0.6",
