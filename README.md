@@ -226,20 +226,58 @@ npx cypress run
 
 3. Run specific feature file:
 ```bash
-npx cypress run --spec "cypress/e2e/features/login.feature"
 npx cypress run --spec "cypress/e2e/features/shopping_cart.feature"
+npx cypress run --spec "cypress/e2e/features/sorting.feature"
 ```
 
 4. Run tests with specific tags:
 ```bash
-npx cypress run --env grepTags=@smoke
-npx cypress run --env grepTags=@regression
+# Run smoke tests only
+npx cypress run --env TAGS='@smoke'
+
+# Run all checkout tests
+npx cypress run --env TAGS='@checkout'
+
+# Run all regression tests
+npx cypress run --env TAGS='@regression'
+
+# Run specific user tests
+npx cypress run --env TAGS='@standard_user'
+npx cypress run --env TAGS='@visual_user'
+
+# Run parallel/multi-user tests
+npx cypress run --env TAGS='@parallel'
+npx cypress run --env TAGS='@multi_user'
+
+# Run specific functional area tests
+npx cypress run --env TAGS='@cart'
+npx cypress run --env TAGS='@sorting'
+npx cypress run --env TAGS='@inventory'
+
+# Combine multiple tags
+npx cypress run --env TAGS='@smoke and @checkout'
+npx cypress run --env TAGS='@standard_user and @smoke'
+
+# Exclude specific tags
+npx cypress run --env TAGS='not @parallel'
+npx cypress run --env TAGS='@regression and not @parallel'
 ```
 
 5. Run tests in a specific browser:
 ```bash
 npx cypress run --browser chrome
 npx cypress run --browser firefox
+```
+
+6. Run tests with specific configuration:
+```bash
+# Run tests using custom base URL
+npx cypress run --config baseUrl=https://www.saucedemo.com
+
+
+npx cypress run --config viewportWidth=1280,viewportHeight=720
+
+npx cypress run --config video=false
 ```
 
 ## Test Reports
