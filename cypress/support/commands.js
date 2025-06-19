@@ -17,8 +17,8 @@ const waitUntilTokensExist = (username) => {
 }
 
 Cypress.Commands.add('authenticateUser', (username) => {
-  const envUsername = Cypress.env(`${username.toUpperCase()}_USERNAME`) || username;
-  const password = Cypress.env(`${username.toUpperCase()}_PASSWORD`) || 'secret_sauce';
+  const envUsername = Cypress.env(`${username.toUpperCase()}_USERNAME`);
+  const password = Cypress.env(`${username.toUpperCase()}_PASSWORD`);
   
   cy.session(username, () => {
     cy.visit('/')
