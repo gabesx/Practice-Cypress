@@ -17,7 +17,7 @@ Feature: SauceDemo Multi-User Testing
       | Jane      | Smith    | 67890      |
     Then both users should have empty carts when they log back in
 
-  Scenario: Inventory updates affect all users
+  Scenario: Items remain available after purchase
     Given "standard_user" logs in and adds "Sauce Labs Backpack" to cart
     When "standard_user" completes the purchase
     And "visual_user" logs in to the inventory page

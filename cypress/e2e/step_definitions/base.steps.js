@@ -84,6 +84,11 @@ Then('{string} should show reduced inventory', (itemName) => {
   cy.contains('.inventory_item', itemName)
     .find('.inventory_item_desc')
     .should('have.text', 'carryallTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
+  
+  // Verify the item can still be added to cart
+  cy.contains('.inventory_item', itemName)
+    .find('button')
+    .should('have.text', 'Add to cart');
 });
 
 Then('each user should see their correct order confirmation', () => {
