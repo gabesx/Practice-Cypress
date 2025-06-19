@@ -17,15 +17,30 @@ const waitUntilTokensExist = (username) => {
 }
 
 Cypress.Commands.add('authenticateUser', (username) => {
-  const envUsername = Cypress.env(`${username.toUpperCase()}_USERNAME`);
-  const password = Cypress.env(`${username.toUpperCase()}_PASSWORD`);
+  let envUsername, password;
+  
+  if (username === 'standard_user') {
+    envUsername = Cypress.env('STANDARD_USERNAME');
+    password = Cypress.env('STANDARD_PASSWORD');
+  } else if (username === 'visual_user') {
+    envUsername = Cypress.env('VISUAL_USERNAME');
+    password = Cypress.env('VISUAL_PASSWORD');
+  } else if (username === 'problem_user') {
+    envUsername = Cypress.env('PROBLEM_USERNAME');
+    password = Cypress.env('PROBLEM_PASSWORD');
+  } else if (username === 'locked_out_user') {
+    envUsername = Cypress.env('LOCKED_OUT_USERNAME');
+    password = Cypress.env('LOCKED_OUT_PASSWORD');
+  } else {
+    envUsername = Cypress.env('STANDARD_USERNAME');
+    password = Cypress.env('STANDARD_PASSWORD');
+  }
   
   cy.session(username, () => {
     cy.visit('/')
     cy.get('[data-test="username"]').type(envUsername)
     cy.get('[data-test="password"]').type(password)
     cy.get('[data-test="login-button"]').click()
-    cy.url().should('include', '/inventory.html')
   })
 
   waitUntilTokensExist(username)

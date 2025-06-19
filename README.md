@@ -181,6 +181,12 @@ I created tests for these main scenarios:
    - Both add items to their carts
    - Make sure each person's cart stays separate
    - Both complete their purchases successfully
+   - This scenario is achieved through parallel execution in our CI pipeline:
+     - Uses different user accounts (standard_user and visual_user) configured in environment variables
+     - Tests run simultaneously across multiple CI machines
+     - Implemented using GitHub Actions with parallel execution
+     - Each user session is isolated using Cypress's session management
+     - Can be run locally using: `npx cypress run --record --group 2x-chrome --browser chrome --parallel`
 
 8. **Testing in Different Browsers**
    - Run all the tests in Chrome
@@ -304,4 +310,58 @@ npx cypress cache clear
 - [Cypress Documentation](https://docs.cypress.io)
 - [Cypress Installation Guide](https://docs.cypress.io/app/get-started/install-cypress)
 - [Cucumber Documentation](https://cucumber.io/docs)
-- [Sauce Demo Website](https://www.saucedemo.com) 
+- [Sauce Demo Website](https://www.saucedemo.com)
+
+## Continuous Integration Setup
+
+This project is configured to run in CI using GitHub Actions with parallel test execution. Here's how it's set up:
+
+### Basic CI Configuration
+
+1. **Installation in CI**:
+   ```bash
+   npm install cypress --save-dev
+   ```
+
+2. **Running Tests**:
+   ```bash
+   npx cypress run
+   ```
+
+### Parallel Test Execution
+
+We use parallel test execution to run multiple instances of Cypress at the same time, which helps:
+- Reduce total test run time
+- Run the same tests across different browsers simultaneously
+- Execute simultaneous user scenarios in isolation
+
+Our setup includes:
+- Chrome tests running on 2 machines (`2x-chrome`)
+- Firefox tests running on 2 machines (`2x-firefox`)
+- Electron tests running on 4 machines (`4x-electron`)
+
+### Recording Results
+
+Tests are recorded to Cypress Cloud using:
+```bash
+cypress run --record --key <record_key> --parallel
+```
+
+This provides:
+- Test run recordings and screenshots
+- Parallel test execution dashboard
+- Test failure debugging tools
+- Cross-browser test results
+
+### Environment Variables
+
+The following environment variables are configured in CI:
+```bash
+CYPRESS_RECORD_KEY=<your-key>
+STANDARD_USERNAME=<username>
+STANDARD_PASSWORD=<password>
+VISUAL_USERNAME=<username>
+VISUAL_PASSWORD=<password>
+```
+
+For more details on CI setup, refer to the [Cypress CI documentation](https://docs.cypress.io/app/continuous-integration/overview). 
