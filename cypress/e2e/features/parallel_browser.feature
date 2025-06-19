@@ -1,5 +1,7 @@
+@parallel @multi_user @regression
 Feature: SauceDemo Multi-User Testing
 
+  @sequential_checkout @parallel_users
   Scenario: Sequential user checkout process
     Given "standard_user" logs in and adds items to cart:
       | item                     |
@@ -17,6 +19,7 @@ Feature: SauceDemo Multi-User Testing
       | Jane      | Smith    | 67890      |
     Then both users should have empty carts when they log back in
 
+  @inventory_sync @parallel_users
   Scenario: Items remain available after purchase
     Given "standard_user" logs in and adds "Sauce Labs Backpack" to cart
     When "standard_user" completes the purchase

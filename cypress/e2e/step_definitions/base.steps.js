@@ -44,12 +44,15 @@ Then('both users should have empty carts when they log back in', () => {
   cy.get('[data-test="password"]').type('secret_sauce');
   cy.get('[data-test="login-button"]').click();
   cy.get('.shopping_cart_badge').should('not.exist');
-  cy.get('[data-test="logout_sidebar_link"]').click();
+  cy.get('#react-burger-menu-btn').click();
+  cy.get('#logout_sidebar_link').should('be.visible').click();
   
   cy.get('[data-test="username"]').type('visual_user');
   cy.get('[data-test="password"]').type('secret_sauce');
   cy.get('[data-test="login-button"]').click();
   cy.get('.shopping_cart_badge').should('not.exist');
+  cy.get('#react-burger-menu-btn').click();
+  cy.get('#logout_sidebar_link').should('be.visible').click();
 });
 
 Given('{string} logs in and adds {string} to cart', (username, itemName) => {
@@ -83,7 +86,7 @@ When('{string} logs in to the inventory page', (username) => {
 Then('{string} should show reduced inventory', (itemName) => {
   cy.contains('.inventory_item', itemName)
     .find('.inventory_item_desc')
-    .should('have.text', 'carryallTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
+    .should('have.text', 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
   
   cy.contains('.inventory_item', itemName)
     .find('button')
@@ -130,8 +133,7 @@ Then('the website should function consistently and correctly on both browsers', 
   cy.get('.inventory_item_price').should('be.visible');
 });
 
-Then('the cart should be empty after login', () => {
-  cy.visit('/inventory.html');
+Then('the cart should be empty', () => {
   cy.get('.shopping_cart_badge').should('not.exist');
 });
 

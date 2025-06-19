@@ -1,5 +1,7 @@
+@checkout @visual_user @regression
 Feature: Visual User Checkout Flow
 
+  @visual_checkout @smoke
   Scenario: Visual user completes checkout process
     Given "visual_user" logs in and adds items to cart:
       | item                        |
@@ -8,5 +10,5 @@ Feature: Visual User Checkout Flow
     When "visual_user" completes checkout with:
       | firstName | lastName | postalCode |
       | Jane      | Smith    | 67890      |
-    Then the cart should be empty after login
+    Then the cart should be empty
     And the order confirmation should be visible 

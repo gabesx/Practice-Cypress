@@ -1,3 +1,4 @@
+@cart @regression
 Feature: Shopping Cart Functionality
   As a standard user of Swag Labs
   I want to add items to cart and complete checkout
@@ -10,7 +11,7 @@ Feature: Shopping Cart Functionality
     And I click the login button
     Then I should be logged in successfully
 
-  @shopping @regression
+  @cart_checkout @backpack_tshirt @smoke
   Scenario: Purchase Backpack and T-Shirt
     When I add the following items to cart:
       | item                      | price  |
@@ -33,7 +34,7 @@ Feature: Shopping Cart Functionality
     When I click finish
     Then I should see the order confirmation message
 
-  @shopping @regression
+  @cart_checkout @backpack_jacket
   Scenario: Purchase Backpack and Fleece Jacket
     When I add the following items to cart:
       | item                       | price  |

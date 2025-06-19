@@ -1,5 +1,7 @@
+@inventory @regression
 Feature: Inventory Update Verification
 
+  @inventory_sync @multi_user
   Scenario: Inventory updates are reflected across sessions
     Given "standard_user" logs in and adds "Sauce Labs Backpack" to cart
     When "standard_user" completes the purchase
