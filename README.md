@@ -1,61 +1,61 @@
 # Sauce Demo E2E Test Suite
 
-This project is for practicing on e2e tests for the Sauce Demo website using Cypress and Cucumber.
+This is my practice project for learning end-to-end testing on the Sauce Demo website using Cypress and Cucumber.
 
-## Prerequisites
-- [Node.js](https://nodejs.org/)
+## What You'll Need
+
+- [Node.js](https://nodejs.org/) installed on your computer
 - npm (comes with Node.js)
 - Git
-- Operating System use in this practice
-  * macOS
+- I used macOS for this project
 
-## Project Setup
+## Getting Started
 
-1. Create a new directory for your project:
+1. First, create a folder for your project:
 ```bash
 mkdir sauce-demo-tests
 cd sauce-demo-tests
 ```
 
-2. Initialize a new Node.js project:
+2. Set up a new Node.js project:
 ```bash
 npm init -y
 ```
 
-3. Install Cypress and required dependencies:
+3. Install the tools we need:
 ```bash
 npm install cypress --save-dev
 
-# Install Cucumber preprocessor for BDD
+# Install Cucumber
 npm install @badeball/cypress-cucumber-preprocessor --save-dev
 
 # Install esbuild preprocessor
 npm install @bahmutov/cypress-esbuild-preprocessor --save-dev
 ```
 
-4. Open Cypress to generate the initial folder structure:
+4. Open Cypress to create the basic folder structure:
 ```bash
 npx cypress open
 ```
 
-5. Create necessary directories if they don't exist:
+5. Create the folders we need:
 ```bash
 mkdir -p cypress/e2e/features
 mkdir -p cypress/e2e/step_definitions
 ```
 
-6. Clone this repository (if you want to use existing tests):
+6. If you want to use my existing tests, clone this repo:
 ```bash
 git clone <repository-url>
 cd <project-directory>
 ```
 
-7. Install all project dependencies:
+7. Install everything:
 ```bash
 npm install
 ```
 
-## Project Structure
+## How the Project is Organized
 
 ```
 ├── cypress/
@@ -73,13 +73,14 @@ npm install
 └── package.json
 ```
 
-## Configuration Files Setup
-1. Create `cypress.config.js`:
+## Setting Up the Configuration Files
+
+1. Create the main Cypress config file:
 ```bash
 touch cypress.config.js
 ```
 
-Add the following content:
+Put this inside:
 ```javascript
 const { defineConfig } = require('cypress');
 const createBundler = require('@bahmutov/cypress-esbuild-preprocessor');
@@ -110,12 +111,12 @@ module.exports = defineConfig({
 });
 ```
 
-2. Create `cypress.env.json`:
+2. Create the environment file:
 ```bash
 touch cypress.env.json
 ```
 
-Add the following content:
+Add this content:
 ```json
 {
   "BASE_URL": "https://www.saucedemo.com",
@@ -140,116 +141,88 @@ Add the following content:
 }
 ```
 
-## Test Scenarios Practice
+## What I Built
 
-1. **Shopping Cart Flow - Backpack and T-Shirt**
-   - Login with standard user
-   - Add "Sauce Labs Backpack" to cart
-   - Add "Sauce Labs Bolt T-Shirt" to cart
-   - Verify items in cart
-   - Complete checkout process
-   - Verify prices and total
-   - Confirm order completion
+I created tests for these main scenarios:
 
-2. **Shopping Cart Flow - Backpack and Fleece Jacket**
-   - Login with standard user
-   - Add "Sauce Labs Backpack" to cart
-   - Add "Sauce Labs Fleece Jacket" to cart
-   - Verify items in cart
-   - Complete checkout process
-   - Verify prices and total
-   - Confirm order completion
+1. **Buying a Backpack and T-Shirt**
+   - Log in as a regular user
+   - Add the backpack to cart
+   - Add the t-shirt to cart
+   - Check that both items are in the cart
+   - Go through checkout
+   - Make sure the prices add up correctly
+   - Confirm the order went through
 
-3. **Product Sorting - Name (A to Z)**
-   - Login with standard user
-   - Select "Name (A to Z)" from sort dropdown
-   - Verify products are correctly sorted alphabetically ascending
-   - Validate first and last items in the sorted list
-   - Verify sorting persists after page refresh
+2. **Buying a Backpack and Fleece Jacket**
+   - Same flow as above but with different items
+   - Tests the jacket instead of the t-shirt
 
-4. **Product Sorting - Name (Z to A)**
-   - Login with standard user
-   - Select "Name (Z to A)" from sort dropdown
-   - Verify products are correctly sorted alphabetically descending
-   - Validate first and last items in the sorted list
-   - Verify sorting persists after page refresh
+3. **Sorting Products by Name (A to Z)**
+   - Log in and sort the product list alphabetically
+   - Check that items are in the right order
+   - Verify the first and last items make sense
 
-5. **Product Sorting - Price (Low to High)**
-   - Login with standard user
-   - Select "Price (low to high)" from sort dropdown
-   - Verify products are correctly sorted by price ascending
-   - Validate cheapest and most expensive items
-   - Verify price format and currency
+4. **Sorting Products by Name (Z to A)**
+   - Same as above but reverse alphabetical order
 
-6. **Product Sorting - Price (High to Low)**
-   - Login with standard user
-   - Select "Price (high to low)" from sort dropdown
-   - Verify products are correctly sorted by price descending
-   - Validate most expensive and cheapest items
-   - Verify price format and currency
+5. **Sorting by Price (Cheapest First)**
+   - Sort products from lowest to highest price
+   - Check that the cheapest item comes first
+   - Verify the most expensive item is last
 
-7. **Concurrent User Checkout**
-   - Simulate two different users (standard_user and visual_user)
-   - Both users add different items to cart simultaneously
-   - Verify each user's cart remains independent
-   - Complete checkout process for both users
-   - Verify order confirmations for both users
+6. **Sorting by Price (Most Expensive First)**
+   - Same as above but most expensive first
 
-8. **Cross-Browser Compatibility**
-   - Execute all test scenarios in Chrome and Firefox
-   - Verify consistent behavior across browsers:
-     * Login functionality
-     * Product sorting
-     * Cart operations
-     * Checkout process
-   - Compare performance metrics between browsers
-   - Validate UI consistency
+7. **Two Users Shopping at the Same Time**
+   - Simulate two different people using the site
+   - Both add items to their carts
+   - Make sure each person's cart stays separate
+   - Both complete their purchases successfully
 
-Each test scenario includes:
-- Pre-conditions and setup
-- Step-by-step verification
-- Error handling
-- Post-conditions cleanup
-- Cross-browser validation where applicable
+8. **Testing in Different Browsers**
+   - Run all the tests in Chrome
+   - Run all the tests in Firefox
+   - Make sure everything works the same way in both
 
-## Running Tests
+## Running the Tests
 
-1. Open Cypress Test Runner (Interactive Mode):
+1. Open Cypress to run tests interactively:
 ```bash
 npx cypress open
 ```
 
-2. Run all tests in headless mode:
+2. Run all tests headless:
 ```bash
 npx cypress run
 ```
 
-3. Run specific feature file:
+3. Run just one specific test file:
 ```bash
 npx cypress run --spec "cypress/e2e/features/shopping_cart.feature"
 npx cypress run --spec "cypress/e2e/features/sorting.feature"
 ```
 
-4. Run tests with specific tags:
+4. Run specific groups of tests using tags:
 ```bash
-# Run smoke tests only
+# Just the quick tests
 npx cypress run --env TAGS='@smoke'
 
-# Run all checkout tests
+# All the checkout tests
 npx cypress run --env TAGS='@checkout'
 
-# Run all regression tests
+# Run all regression tags
 npx cypress run --env TAGS='@regression'
 
-# Run specific user tests
+# Tests for specific users
 npx cypress run --env TAGS='@standard_user'
 npx cypress run --env TAGS='@visual_user'
 
-# Run parallel/multi-user tests
+# Tests that involve multiple users
 npx cypress run --env TAGS='@parallel'
 npx cypress run --env TAGS='@multi_user'
 
-# Run specific functional area tests
+# Tests for specific features
 npx cypress run --env TAGS='@cart'
 npx cypress run --env TAGS='@sorting'
 npx cypress run --env TAGS='@inventory'
@@ -258,70 +231,74 @@ npx cypress run --env TAGS='@inventory'
 npx cypress run --env TAGS='@smoke and @checkout'
 npx cypress run --env TAGS='@standard_user and @smoke'
 
-# Exclude specific tags
+# Skip certain types of tests
 npx cypress run --env TAGS='not @parallel'
 npx cypress run --env TAGS='@regression and not @parallel'
 ```
 
-5. Run tests in a specific browser:
+5. Run tests in different browsers:
 ```bash
 npx cypress run --browser chrome
 npx cypress run --browser firefox
 ```
 
-6. Run tests with specific configuration:
+6. Change how the tests run:
 ```bash
-# Run tests using custom base URL
+# Use a different website URL
 npx cypress run --config baseUrl=https://www.saucedemo.com
 
-
+# Change the screen size
 npx cypress run --config viewportWidth=1280,viewportHeight=720
 
+# Turn off video recording
 npx cypress run --config video=false
 ```
 
-## Test Reports
+## What Happens After Tests Run
 
-Cypress automatically generates test reports after each run in the `cypress/reports` directory.
+Cypress creates reports automatically in the `cypress/reports` folder.
 
-## Debugging
+## When Things Go Wrong
 
-1. Use `cy.debug()` in your test code to pause execution
-2. Use `cy.log()` for logging information during test execution
-3. Check screenshots and videos in `cypress/screenshots` and `cypress/videos` after test failures
+1. Use `cy.debug()` in your test code to pause and see what's happening
+2. Use `cy.log()` to print messages during the test
+3. Check the screenshots and videos in `cypress/screenshots` and `cypress/videos` if tests fail
 
-## Common Issues and Solutions
+## Common Problems and How to Fix Them
 
-1. If Cypress is not installed properly:
+1. If Cypress won't install:
 ```bash
 npm install cypress --save-dev
 ```
 
-2. If you get Cucumber preprocessor errors:
+2. If you get errors about Cucumber:
 ```bash
 npm install @badeball/cypress-cucumber-preprocessor --save-dev
 npm install @bahmutov/cypress-esbuild-preprocessor --save-dev
 ```
 
-3. Clear Cypress cache:
+3. If things get weird, clear the cache:
 ```bash
 npx cypress cache clear
 ```
 
-## Best Practices
-1. Use data-test attributes for element selection
-2. Keep tests independent
-3. Use background steps for common setup
-4. Use appropriate waiting strategies
-5. Follow page object pattern for better maintenance
+## Tips for Writing Good Tests
 
-## Contributing
-1. Create a new branch for your feature
-2. Write tests following the existing patterns
-3. Ensure all tests pass
-4. Submit a pull request
+1. Use data-test attributes when you can - they're more reliable
+2. Keep tests independent - each test should work on its own
+3. Use background steps for things you do in every test (like logging in)
+4. Don't use hard waits - let Cypress wait for elements to appear
+5. Organize your code well - it makes it easier to fix things later
 
-## Additional Resources
+## Want to Help?
+
+1. Create a new branch for your changes
+2. Write tests that follow the same style as the existing ones
+3. Make sure all tests pass
+4. Send a pull request
+
+## Useful Links
+
 - [Cypress Documentation](https://docs.cypress.io)
 - [Cypress Installation Guide](https://docs.cypress.io/app/get-started/install-cypress)
 - [Cucumber Documentation](https://cucumber.io/docs)
