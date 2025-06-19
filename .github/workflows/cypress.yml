@@ -11,7 +11,7 @@ env:
 
 jobs:
   install:
-    runs-on: mac-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -27,7 +27,7 @@ jobs:
 
   chrome_parallel:
     needs: install
-    runs-on: mac-latest
+    runs-on: macos-latest
     strategy:
       fail-fast: false
       matrix:
@@ -59,7 +59,7 @@ jobs:
 
   firefox_parallel:
     needs: install
-    runs-on: mac-latest
+    runs-on: macos-latest
     strategy:
       fail-fast: false
       matrix:
@@ -91,7 +91,7 @@ jobs:
 
   electron_parallel:
     needs: install
-    runs-on: mac-latest
+    runs-on: macos-latest
     strategy:
       fail-fast: false
       matrix:
