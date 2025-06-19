@@ -85,7 +85,6 @@ Then('{string} should show reduced inventory', (itemName) => {
     .find('.inventory_item_desc')
     .should('have.text', 'carryallTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
   
-  // Verify the item can still be added to cart
   cy.contains('.inventory_item', itemName)
     .find('button')
     .should('have.text', 'Add to cart');
@@ -129,4 +128,16 @@ Then('the website should function consistently and correctly on both browsers', 
   cy.url().should('include', '/inventory.html');
   cy.get('.inventory_item').should('have.length.gt', 0);
   cy.get('.inventory_item_price').should('be.visible');
+});
+
+Then('the cart should be empty after login', () => {
+  cy.visit('/inventory.html');
+  cy.get('.shopping_cart_badge').should('not.exist');
+});
+
+Then('the order confirmation should be visible', () => {
+  cy.get('.complete-header')
+    .should('have.text', 'Thank you for your order!');
+  cy.get('.complete-text')
+    .should('have.text', 'Your order has been dispatched, and will arrive just as fast as the pony can get there!');
 }); 
