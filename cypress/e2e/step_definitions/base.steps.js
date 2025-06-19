@@ -11,13 +11,11 @@ Given('{string} is viewing the inventory page', (username) => {
 });
 
 Given('{string} logs in and adds items to cart:', (username, dataTable) => {
-  // Login
   cy.visit('/');
   cy.get('[data-test="username"]').type(username);
   cy.get('[data-test="password"]').type('secret_sauce');
   cy.get('[data-test="login-button"]').click();
   
-  // Add items to cart
   dataTable.hashes().forEach((row) => {
     cy.contains('.inventory_item', row.item)
       .find('button')
@@ -28,23 +26,19 @@ Given('{string} logs in and adds items to cart:', (username, dataTable) => {
 Given('{string} completes checkout with:', (username, dataTable) => {
   const userInfo = dataTable.hashes()[0];
   
-  // Go to cart and checkout
   cy.get('.shopping_cart_link').click();
   cy.get('[data-test="checkout"]').click();
   
-  // Fill checkout info
   cy.get('[data-test="firstName"]').type(userInfo.firstName);
   cy.get('[data-test="lastName"]').type(userInfo.lastName);
   cy.get('[data-test="postalCode"]').type(userInfo.postalCode);
   cy.get('[data-test="continue"]').click();
   
-  // Complete purchase
   cy.get('[data-test="finish"]').click();
   cy.get('.complete-header').should('have.text', 'Thank you for your order!');
 });
 
 Then('both users should have empty carts when they log back in', () => {
-  // Check standard_user cart
   cy.visit('/');
   cy.get('[data-test="username"]').type('standard_user');
   cy.get('[data-test="password"]').type('secret_sauce');
@@ -52,7 +46,6 @@ Then('both users should have empty carts when they log back in', () => {
   cy.get('.shopping_cart_badge').should('not.exist');
   cy.get('[data-test="logout_sidebar_link"]').click();
   
-  // Check visual_user cart
   cy.get('[data-test="username"]').type('visual_user');
   cy.get('[data-test="password"]').type('secret_sauce');
   cy.get('[data-test="login-button"]').click();
@@ -90,19 +83,14 @@ When('{string} logs in to the inventory page', (username) => {
 Then('{string} should show reduced inventory', (itemName) => {
   cy.contains('.inventory_item', itemName)
     .find('.inventory_item_desc')
-    .invoke('text')
-    .then((text) => {
-      expect(text.toLowerCase()).to.include('left');
-    });
+    .should('have.text', 'carryallTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.');
 });
 
 Then('each user should see their correct order confirmation', () => {
-  // Verify first user's order
   cy.authenticateUser('standard_user');
   cy.visit('/inventory.html');
   cy.get('.shopping_cart_badge').should('not.exist');
 
-  // Verify second user's order
   cy.authenticateUser('visual_user');
   cy.visit('/inventory.html');
   cy.get('.shopping_cart_badge').should('not.exist');
