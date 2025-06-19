@@ -1,1 +1,8 @@
 node_modules/
+cypress.env.json
+.env
+.env.local
+.env.*.local
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/

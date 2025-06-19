@@ -1,4 +1,3 @@
-
 Cypress.Commands.add('login', (username, password) => {
   cy.visit('/')
   cy.get('[data-test="username"]').type(username)
@@ -18,7 +17,7 @@ const waitUntilTokensExist = (username) => {
 }
 
 Cypress.Commands.add('authenticateUser', (username) => {
-  const password = 'secret_sauce'
+  const password = Cypress.env(`${username.toUpperCase()}_PASSWORD`) || 'secret_sauce'
   
   cy.session(username, () => {
     cy.visit('/')

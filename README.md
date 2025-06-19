@@ -141,6 +141,8 @@ Add this content:
 }
 ```
 
+**Important**: Never commit your actual credentials to git! The `cypress.env.json` file is already in `.gitignore` to keep your secrets safe.
+
 ## What I Built
 
 I created tests for these main scenarios:

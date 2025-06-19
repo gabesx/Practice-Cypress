@@ -13,7 +13,7 @@ Given('{string} is viewing the inventory page', (username) => {
 Given('{string} logs in and adds items to cart:', (username, dataTable) => {
   cy.visit('/');
   cy.get('[data-test="username"]').type(username);
-  cy.get('[data-test="password"]').type('secret_sauce');
+  cy.get('[data-test="password"]').type(Cypress.env(`${username.toUpperCase()}_PASSWORD`) || 'secret_sauce');
   cy.get('[data-test="login-button"]').click();
   
   dataTable.hashes().forEach((row) => {
@@ -41,14 +41,14 @@ Given('{string} completes checkout with:', (username, dataTable) => {
 Then('both users should have empty carts when they log back in', () => {
   cy.visit('/');
   cy.get('[data-test="username"]').type('standard_user');
-  cy.get('[data-test="password"]').type('secret_sauce');
+  cy.get('[data-test="password"]').type(Cypress.env('STANDARD_PASSWORD') || 'secret_sauce');
   cy.get('[data-test="login-button"]').click();
   cy.get('.shopping_cart_badge').should('not.exist');
   cy.get('#react-burger-menu-btn').click();
   cy.get('#logout_sidebar_link').should('be.visible').click();
   
   cy.get('[data-test="username"]').type('visual_user');
-  cy.get('[data-test="password"]').type('secret_sauce');
+  cy.get('[data-test="password"]').type(Cypress.env('VISUAL_PASSWORD') || 'secret_sauce');
   cy.get('[data-test="login-button"]').click();
   cy.get('.shopping_cart_badge').should('not.exist');
   cy.get('#react-burger-menu-btn').click();
@@ -58,7 +58,7 @@ Then('both users should have empty carts when they log back in', () => {
 Given('{string} logs in and adds {string} to cart', (username, itemName) => {
   cy.visit('/');
   cy.get('[data-test="username"]').type(username);
-  cy.get('[data-test="password"]').type('secret_sauce');
+  cy.get('[data-test="password"]').type(Cypress.env(`${username.toUpperCase()}_PASSWORD`) || 'secret_sauce');
   cy.get('[data-test="login-button"]').click();
   
   cy.contains('.inventory_item', itemName)
@@ -79,7 +79,7 @@ When('{string} completes the purchase', () => {
 When('{string} logs in to the inventory page', (username) => {
   cy.visit('/');
   cy.get('[data-test="username"]').type(username);
-  cy.get('[data-test="password"]').type('secret_sauce');
+  cy.get('[data-test="password"]').type(Cypress.env(`${username.toUpperCase()}_PASSWORD`) || 'secret_sauce');
   cy.get('[data-test="login-button"]').click();
 });
 
@@ -122,7 +122,7 @@ Then('the website should function consistently and correctly on both browsers', 
   cy.session(browserTestSession, () => {
     cy.visit('/');
     cy.get('[data-test="username"]').type('standard_user');
-    cy.get('[data-test="password"]').type('secret_sauce');
+    cy.get('[data-test="password"]').type(Cypress.env('STANDARD_PASSWORD') || 'secret_sauce');
     cy.get('[data-test="login-button"]').click();
     cy.url().should('include', '/inventory.html');
   });
