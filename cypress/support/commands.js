@@ -17,11 +17,12 @@ const waitUntilTokensExist = (username) => {
 }
 
 Cypress.Commands.add('authenticateUser', (username) => {
-  const password = Cypress.env(`${username.toUpperCase()}_PASSWORD`) || 'secret_sauce'
+  const envUsername = Cypress.env(`${username.toUpperCase()}_USERNAME`) || username;
+  const password = Cypress.env(`${username.toUpperCase()}_PASSWORD`) || 'secret_sauce';
   
   cy.session(username, () => {
     cy.visit('/')
-    cy.get('[data-test="username"]').type(username)
+    cy.get('[data-test="username"]').type(envUsername)
     cy.get('[data-test="password"]').type(password)
     cy.get('[data-test="login-button"]').click()
     cy.url().should('include', '/inventory.html')
